@@ -1,0 +1,19 @@
+.stats-label {
+    font-size: 15px;
+    display: inline-block;
+    padding: 2px 5px;
+    margin-right: 5px;
+    background-color: gray;
+    color: white;
+    border-radius: 5px;
+}
+
+.stats-text {
+    color: #0088CC;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.system-mission li {
+    line-height: 30px;
+}
