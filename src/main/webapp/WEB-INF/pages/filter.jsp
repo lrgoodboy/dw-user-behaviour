@@ -5,10 +5,13 @@
 <t:base>
 
 <jsp:attribute name="styles">
+<link href="<c:url value="/webjars/bootstrap-datepicker/1.2.0/css/datepicker.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/css/filter.css" />" rel="stylesheet">
 </jsp:attribute>
 
 <jsp:attribute name="scripts">
+<script type="text/javascript" src="<c:url value="/webjars/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.js" />"></script>
+<script type="text/javascript" src="<c:url value="/webjars/bootstrap-datepicker/1.2.0/js/locales/bootstrap-datepicker.zh-CN.js" />"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/filter.js" />"></script>
 <script type="text/javascript">
 new Filter({
@@ -60,6 +63,8 @@ new Filter({
   </c:forEach>
 </table>
 
+<c:if test="${totalPage >= 1}">
+
 <div class="pagination pagination-small pagination-centered">
   <ul>
     <li ${page == 1 ? 'class="disabled"' : ''}><a href="javascript:void(0)">&lt;&lt;</a></li>
@@ -75,6 +80,8 @@ new Filter({
     <li ${page == totalPage ? 'class="disabled"' : ''}><a href="javascript:void(0)" page="${totalPage}">&gt;&gt;</a></li>
   </ul>
 </div>
+
+</c:if>
 
 </jsp:body>
 

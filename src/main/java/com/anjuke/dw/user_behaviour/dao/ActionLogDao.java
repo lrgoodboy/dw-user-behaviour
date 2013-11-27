@@ -84,10 +84,15 @@ public class ActionLogDao extends JdbcDaoSupport {
         sql.append(" FROM zj_dw_mobile_action_log_").append(dfDailyTable.format(date));
         sql.append(" WHERE 1 = 1");
 
-        if (uniqid != null && !uniqid.isEmpty()) {
-            sql.append(" AND unique_id LIKE ?");
-            params.add(uniqid + "%");
+        if (uniqid == null || uniqid.length() < 3) {
+            if (count != null) {
+                count[0] = 0;
+            }
+            return new ArrayList<ActionLog>();
         }
+
+        sql.append(" AND unique_id LIKE ?");
+        params.add(uniqid + "%");
 
         if (count == null) {
 

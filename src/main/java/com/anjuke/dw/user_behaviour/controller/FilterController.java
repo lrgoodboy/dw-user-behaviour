@@ -59,9 +59,11 @@ public class FilterController {
         String channels = "A00,A01,A02,A08,A17,A18,A20,b00,b01,b03,b04,b05,b07,b100,b101,b102,b103,b112,b130,b132,b133,b135,b144,b148,b171,b172,b174,b178,b180,b186,b187,b188,b190,b191,b196,b198,b199,b200,b205,b206,b210,b22,b221,b23,b238,b239,b240,b241,b242,b243,b248,b25,b250,b251,b253,b254,b258,b30,b40,b49,b50,b51,b52,b56,b58,b59,b60,b61,b63,b64,b78,b81,b82,b92,b93,b95,b98,b99,d10,d52,d75,d85,d87,dev222222,E01";
         model.addAttribute("channelList", channels.split(","));
 
-        List<ActionLog> actionLogList = actionLogDao.findByFilters(
-                date, os, version, channel, offset, PAGE_SIZE, null);
-        model.addAttribute("actionLogList", actionLogList);
+        if (totalPage >= 1) {
+            List<ActionLog> actionLogList = actionLogDao.findByFilters(
+                    date, os, version, channel, offset, PAGE_SIZE, null);
+            model.addAttribute("actionLogList", actionLogList);
+        }
 
         model.addAttribute("date", dfDate.format(date));
         model.addAttribute("os", os);

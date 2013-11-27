@@ -11,6 +11,11 @@ User.prototype = {
     init: function() {
         var self = this;
 
+        $('[name="date"]').datepicker({
+            language: "zh-CN",
+            format: "yyyy-mm-dd"
+        });
+
         $('#btnFilter').click(function() {
             $('[name="page"]').val(1);
         });

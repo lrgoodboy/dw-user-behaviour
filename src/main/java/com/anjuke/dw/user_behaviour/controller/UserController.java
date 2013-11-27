@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.commons.lang.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,9 +40,16 @@ public class UserController {
             date = DateUtils.addDays(new Date(), -1);
         }
 
-        Integer[] count = new Integer[1];
-        actionLogDao.findByUniqid(date, uniqid, null, null, count);
-        int totalPage = (int) Math.ceil((double) count[0] / PAGE_SIZE);
+        int totalPage = 0;
+        try {
+            Integer[] count = new Integer[1];
+            actionLogDao.findByUniqid(date, uniqid, null, null, count);
+            totalPage = (int) Math.ceil((double) count[0] / PAGE_SIZE);
+        } catch (DataAccessException e) {
+            if (!e.getMessage().contains("doesn't exist")) {
+                throw e;
+            }
+        }
 
         if (page < 1) {
             page = 1;
@@ -51,9 +59,11 @@ public class UserController {
         }
         int offset = (page - 1) * PAGE_SIZE;
 
-        List<ActionLog> actionLogList = actionLogDao.findByUniqid(
-                date, uniqid, offset, PAGE_SIZE, null);
-        model.addAttribute("actionLogList", actionLogList);
+        if (totalPage >= 1) {
+            List<ActionLog> actionLogList = actionLogDao.findByUniqid(
+                    date, uniqid, offset, PAGE_SIZE, null);
+            model.addAttribute("actionLogList", actionLogList);
+        }
 
         model.addAttribute("date", dfDate.format(date));
         model.addAttribute("uniqid", uniqid);
