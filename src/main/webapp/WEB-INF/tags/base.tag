@@ -22,7 +22,7 @@
           <ul class="nav nav-pills pull-right" style="padding-top: 10px;">
             <li ${naviTab == 'home' ? 'class="active"' : ''}><a href="<c:url value="/" />">首页</a></li>
             <li ${naviTab == 'filter' ? 'class="active"' : ''}><a href="<c:url value="/filter" />">筛选用户</a></li>
-            <li ${naviTab == 'user' ? 'class="active"' : ''}><a href="#">查看用户</a></li>
+            <li ${naviTab == 'user' ? 'class="active"' : ''}><a href="<c:url value="/user" />">查看用户</a></li>
             <li ${naviTab == 'help' ? 'class="active"' : ''}><a href="javascript:void(0);">使用帮助</a></li>
           </ul>
         </div>
