@@ -46,7 +46,6 @@ new Filter({
 
 <table class="table table-condensed table-striped">
   <tr>
-    <th>#</th>
     <th>Unique ID</th>
     <th>Page Name</th>
     <th>Action Name</th>
@@ -54,7 +53,6 @@ new Filter({
   </tr>
   <c:forEach var="actionLog" items="${actionLogList}">
   <tr>
-    <td>${actionLog.id}</td>
     <td><a href="<c:url value="/user?date=${date}&uniqid=${actionLog.uniqueId}" />">${actionLog.uniqueId}</a></td>
     <td>${actionLog.pageId}</td>
     <td>${actionLog.actionId}</td>

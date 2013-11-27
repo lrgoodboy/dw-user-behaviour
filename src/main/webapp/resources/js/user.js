@@ -25,6 +25,16 @@ User.prototype = {
             $('[name="page"]').val($(this).attr('page'));
             $('#frmFilter').submit();
         });
+
+        $('i[action-info]').popover({
+            html: true,
+            content: function() {
+                var info = $(this).attr('action-info').split(',');
+                return '系统：' + info[0] + '<br>'
+                     + '版本：' + info[1] + '<br>'
+                     + '渠道：' + info[2];
+            }
+        }).css('cursor', 'pointer');
     },
 
     _theEnd: undefined

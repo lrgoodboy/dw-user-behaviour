@@ -30,16 +30,16 @@ new User({
 
 <table class="table table-condensed table-striped">
   <tr>
-    <th>#</th>
     <th>Unique ID</th>
+    <th></th>
     <th>Page Name</th>
     <th>Action Name</th>
     <th>Client Time</th>
   </tr>
   <c:forEach var="actionLog" items="${actionLogList}">
   <tr>
-    <td>${actionLog.id}</td>
     <td>${actionLog.uniqueId}</td>
+    <td><i class="icon-info-sign" action-info="${actionLog.machine},${actionLog.appVersion},${actionLog.pm}"></i></td>
     <td>${actionLog.pageId}</td>
     <td>${actionLog.actionId}</td>
     <td>${actionLog.logTime}</td>
