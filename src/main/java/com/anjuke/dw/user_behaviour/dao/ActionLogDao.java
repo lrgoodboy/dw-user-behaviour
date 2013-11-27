@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -75,12 +74,13 @@ public class ActionLogDao extends JdbcDaoSupport {
         }
     }
 
-    public List<ActionLog> findByUniqid(Date date, String uniqid, Integer offset, Integer limit) {
+    public List<ActionLog> findByUniqid(Date date, String uniqid,
+            Integer offset, Integer limit, Integer[] count) {
 
         StringBuilder sql = new StringBuilder();
         List<Object> params = new ArrayList<Object>();
 
-        sql.append("SELECT ").append(SELECT_FIELDS);
+        sql.append("SELECT ").append(count == null ? SELECT_FIELDS : "COUNT(*)");
         sql.append(" FROM zj_dw_mobile_action_log_").append(dfDailyTable.format(date));
         sql.append(" WHERE 1 = 1");
 
@@ -89,18 +89,28 @@ public class ActionLogDao extends JdbcDaoSupport {
             params.add(uniqid + "%");
         }
 
-        if (offset == null) {
-            offset = 0;
+        if (count == null) {
+
+            if (offset == null) {
+                offset = 0;
+            }
+
+            if (limit == null) {
+                limit = 20;
+            }
+
+            sql.append(" ORDER BY log_time");
+            sql.append(" LIMIT ").append(offset).append(", ").append(limit);
+
+            return getJdbcTemplate().query(sql.toString(), params.toArray(), rowMapper);
+
+        } else {
+
+            count[0] = getJdbcTemplate().queryForObject(
+                    sql.toString(), params.toArray(), Number.class).intValue();
+            return null;
         }
 
-        if (limit == null) {
-            limit = 20;
-        }
-
-        sql.append(" ORDER BY log_time");
-        sql.append(" LIMIT ").append(offset).append(", ").append(limit);
-
-        return getJdbcTemplate().query(sql.toString(), params.toArray(), rowMapper);
     }
 
     private RowMapper<ActionLog> rowMapper = new RowMapper<ActionLog>() {
