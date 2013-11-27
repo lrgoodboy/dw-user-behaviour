@@ -26,8 +26,8 @@ public class UserController {
 
     @RequestMapping("/user")
     public String index(ModelMap model,
-            @RequestParam("date") String dateString,
-            @RequestParam("uniqid") String uniqid) {
+            @RequestParam(value = "date", required = false) String dateString,
+            @RequestParam(value = "uniqid", required = false) String uniqid) {
         
         Date date = null;
         try {
