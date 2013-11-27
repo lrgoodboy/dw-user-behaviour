@@ -11,7 +11,7 @@
 <jsp:body>
 <form class="form-inline filter-form" method="get" action="">
   <input type="text" name="date" placeholder="日期" class="input-medium" value="${date}">
-  <input type="text" name="uniqid" placeholder="Unique ID" value="${uniqid}">
+  <input type="text" name="uniqid" placeholder="Unique ID" class="input-xlarge" value="${uniqid}">
   <input type="submit" value="筛选" class="btn">
 </form>
 
