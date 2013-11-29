@@ -8,15 +8,17 @@
          http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:property-placeholder
-        location="classpath:spring/datasource.properties,file:datasource.properties"
+        location="classpath:spring/datasource.properties,classpath:override/spring/datasource.properties"
         ignore-resource-not-found="true" />
 
     <bean id="dwStageDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
         destroy-method="close" p:driverClass="${jdbc.driverClassName}"
         p:jdbcUrl="${jdbc.dw_stage.url}" p:user="${jdbc.dw_stage.username}"
-        p:password="${jdbc.dw_stage.password}" p:initialPoolSize="1"
-        p:minPoolSize="1" p:maxPoolSize="1" p:acquireIncrement="1" />
-        
+        p:password="${jdbc.dw_stage.password}" p:initialPoolSize="0"
+        p:minPoolSize="0" p:maxPoolSize="2" p:acquireIncrement="1"
+        p:idleConnectionTestPeriod="300" p:testConnectionOnCheckin="true"
+        p:preferredTestQuery="SELECT 1" />
+
     <bean id="actionLogDao" class="com.anjuke.dw.user_behaviour.dao.ActionLogDao"
         p:dataSource-ref="dwStageDataSource" />
 
