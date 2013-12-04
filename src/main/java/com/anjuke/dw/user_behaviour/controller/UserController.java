@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.anjuke.dw.user_behaviour.dao.ActionLogDao;
+import com.anjuke.dw.user_behaviour.dao.ActionLogLkpDao;
 import com.anjuke.dw.user_behaviour.model.ActionLog;
 
 
@@ -25,6 +26,8 @@ public class UserController {
 
     @Autowired
     private ActionLogDao actionLogDao;
+    @Autowired
+    private ActionLogLkpDao actionLogLkpDao;
 
     @RequestMapping("/user")
     public String index(ModelMap model,
@@ -64,6 +67,9 @@ public class UserController {
                     date, uniqid, offset, PAGE_SIZE, null);
             model.addAttribute("actionLogList", actionLogList);
         }
+        
+        model.addAttribute("pageLkp", actionLogLkpDao.getByType(ActionLogLkpDao.TYPE_PAGE));
+        model.addAttribute("actionLkp", actionLogLkpDao.getByType(ActionLogLkpDao.TYPE_ACTION));
 
         model.addAttribute("date", dfDate.format(date));
         model.addAttribute("uniqid", uniqid);

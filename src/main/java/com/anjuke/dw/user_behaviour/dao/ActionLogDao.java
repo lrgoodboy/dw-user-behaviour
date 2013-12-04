@@ -10,12 +10,10 @@ import java.util.List;
 
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
-import org.springframework.stereotype.Repository;
 
 import com.anjuke.dw.user_behaviour.model.ActionLog;
 
 
-@Repository
 public class ActionLogDao extends JdbcDaoSupport {
 
     private static final String SELECT_FIELDS =

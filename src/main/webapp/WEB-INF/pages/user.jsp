@@ -40,8 +40,8 @@ new User({
   <tr>
     <td>${actionLog.uniqueId}</td>
     <td><i class="icon-info-sign" action-info="${actionLog.machine},${actionLog.appVersion},${actionLog.pm}"></i></td>
-    <td>${actionLog.pageId}</td>
-    <td>${actionLog.actionId}</td>
+    <td>${empty pageLkp[actionLog.pageId] ? actionLog.pageId : pageLkp[actionLog.pageId]}</td>
+    <td>${empty actionLkp[actionLog.actionId] ? actionLog.actionId : actionLkp[actionLog.actionId]}</td>
     <td>${actionLog.logTime}</td>
   </tr>
   </c:forEach>

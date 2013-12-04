@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.anjuke.dw.user_behaviour.dao.ActionLogDao;
+import com.anjuke.dw.user_behaviour.dao.ActionLogLkpDao;
 import com.anjuke.dw.user_behaviour.model.ActionLog;
 
 
@@ -24,6 +25,8 @@ public class FilterController {
 
     @Autowired
     private ActionLogDao actionLogDao;
+    @Autowired
+    private ActionLogLkpDao actionLogLkpDao;
 
     @RequestMapping("/filter")
     public String index(ModelMap model,
@@ -64,6 +67,9 @@ public class FilterController {
                     date, os, version, channel, offset, PAGE_SIZE, null);
             model.addAttribute("actionLogList", actionLogList);
         }
+        
+        model.addAttribute("pageLkp", actionLogLkpDao.getByType(ActionLogLkpDao.TYPE_PAGE));
+        model.addAttribute("actionLkp", actionLogLkpDao.getByType(ActionLogLkpDao.TYPE_ACTION));
 
         model.addAttribute("date", dfDate.format(date));
         model.addAttribute("os", os);

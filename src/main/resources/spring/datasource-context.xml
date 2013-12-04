@@ -21,5 +21,8 @@
 
     <bean id="actionLogDao" class="com.anjuke.dw.user_behaviour.dao.ActionLogDao"
         p:dataSource-ref="dwStageDataSource" />
+        
+    <bean id="actionLogLkpDao" class="com.anjuke.dw.user_behaviour.dao.ActionLogLkpDao"
+        p:dataSource-ref="dwStageDataSource" />
 
 </beans>

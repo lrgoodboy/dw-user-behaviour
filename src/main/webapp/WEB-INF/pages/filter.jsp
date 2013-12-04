@@ -54,8 +54,8 @@ new Filter({
   <c:forEach var="actionLog" items="${actionLogList}">
   <tr>
     <td><a href="<c:url value="/user?date=${date}&uniqid=${actionLog.uniqueId}" />">${actionLog.uniqueId}</a></td>
-    <td>${actionLog.pageId}</td>
-    <td>${actionLog.actionId}</td>
+    <td>${empty pageLkp[actionLog.pageId] ? actionLog.pageId : pageLkp[actionLog.pageId]}</td>
+    <td>${empty actionLkp[actionLog.actionId] ? actionLog.actionId : actionLkp[actionLog.actionId]}</td>
     <td>${actionLog.logTime}</td>
   </tr>
   </c:forEach>
